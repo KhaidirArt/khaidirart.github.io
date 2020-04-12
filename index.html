@@ -5,7 +5,7 @@
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.css">
+	  <link rel="stylesheet" type="text/css" href="style.css" />
 	  <style type="text/css">
 	  	body{
 	  		overflow: hidden;
@@ -63,10 +63,6 @@
 	  		background: linear-gradient(90deg, rgba(0,255,255,1) 0%, rgba(0,0,255,1) 50%, rgba(255,0,255,1) 100%);
 	  		opacity: 0;
 	  	}
-	  	.custom{
-	  		background-color: #0079FF;
-	  		opacity: 0;	
-	  	}
 	  	.jam,.ucapan,.quotes{
 	  		margin: 0px;
 	  		padding: 0px;
@@ -95,7 +91,6 @@
 	  		text-align: center;
 	  		font-size: 15pt;
 	  		text-shadow: 0px 0px 10px #000;
-	  		z-index: 2;
 	  	}
 	  	.kontrol{
 	  		margin: 20px;
@@ -110,15 +105,15 @@
 	  	}
 	  	.panah{
 	  		content: '';
-	  		width: 10px;
-	  		height: 10px;
+	  		width: 20px;
+	  		height: 20px;
 	  		position: absolute;
-	  		top: calc(50% - 5px);
+	  		top: calc(50% - 10px);
 	  		right: -30px;
-	  		border: 2px solid rgba(255,255,255,0.2);
+	  		border: 5px solid white;
 	  		border-bottom: none;
 	  		border-left: none;
-	  		border-radius: 2px;
+	  		border-radius: 5px;
 	  		border-top-left-radius: 3px;
 	  		border-bottom-right-radius: 3px;
 	  		transform: rotate(45deg);
@@ -654,43 +649,43 @@
 				S=s;
 
 				if (H<5){
-					txt='Have a Good Night Gita 😴';
+					txt='Have a Good Night:)';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<9){
-					txt='Good Morning Gita Nurpadilah 😁';
+					txt='Good Morning You:)';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<12){
-					txt='Be Happy Today';
+					txt='Be Happy Today:)';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<16){
-					txt='Good Afternoon Gita Manis 😉';
+					txt='Good Afternoon Gita Manis:)';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<19){
-					txt='Good Afternoon Gita, Have a good rest';
+					txt='Good Afternoon Gita,Take a rest';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<23){
-					txt='Good Evening Gita Nurpadilah';
+					txt='Good Evening Gita Nurpadilah:)';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<=24){
-					txt='Time to Sleep, Good Night';
+					txt='Time to Sleep, Good Night:)';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
@@ -785,7 +780,7 @@
 			  },
 			  {
 			    "quote": "Masa lalu dan frustasi merupakan fondasi dasar untuk menciptakan kembali kehidupan baru yang lebih baik",
-			    "source": "Anthony Robbins"
+			    "source": "KhaidirArt"
 			  },
 			  {
 			    "quote": "Ada kalimat yang ingin aku dapatkan dari dia tapi aku dapat dari orang lain",
@@ -804,7 +799,7 @@
 			    "source": "Pidi baiq (Dilan 1990)"
 			  },
 			  {
-			    "quote": "You make me happy in ways other people can't.",
+			    "quote": "You make me happy in ways other people can't",
 			    "source": "KhaidirArt"
 			  },
 			]
