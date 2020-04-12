@@ -65,7 +65,7 @@
 	  	}
 	  	.custom{
 	  		background-color: #0079FF;
-	  		opacity: 0;
+	  		opacity: 0;	
 	  	}
 	  	.jam,.ucapan,.quotes{
 	  		margin: 0px;
@@ -123,21 +123,6 @@
 	  		border-bottom-right-radius: 3px;
 	  		transform: rotate(45deg);
 	  		z-index: 50;
-	  	}
-	  	#color-picker{
-	  		width: 100%;
-	  	}
-	  	.note{
-	  		color: white;
-	  		transition: all 2s ease;
-	  		opacity: 0;
-	  		position: absolute;
-	  		top: 50%;
-	  		left: 50%;
-	  		transform: translate(-50%,-50%);
-	  		font-size: 20pt;
-	  		text-align: center;
-	  		width: 100vh;
 	  	}
   		.kotak{
   			position: absolute;
@@ -234,14 +219,6 @@
   			transition: 0.5s;
   			animation: animate2 10s linear infinite;
   		}
-  		.pengembang{
-  			position: absolute;
-  			font-size: 10px;
-  			color: #FFFFFF;
-  			bottom: 0px;
-  			right: 0px;
-  			opacity: 0.3;
-  		}
   		@keyframes animate{
   			0%{
   				transform: translateY(0) rotate(0deg);
@@ -280,8 +257,8 @@
 		  		font-size: 15pt;
 		  		transform: translate(-50%,calc(50% + 50px));
 		  	}
-		  	.quotes,.note{
-		  		font-size: 15pt;
+		  	.quotes{
+		  		font-size: 10pt;
 		  	}
 		  	.bulat{
 	  			width: 300px;
@@ -293,16 +270,13 @@
 		  		font-size: 10pt;
 		  	}
 		  	.quotes{
-		  		font-size: 7pt;
-		  	}
-		  	.note{
-		  		font-size: 10pt;
+		  		font-size: 5pt;
 		  	}
   		}
 	  </style>
 	</head>
-	<body onload="init()">
-		<div class="kontrol" onload="readStorage()">
+	<body onload="init_auto()">
+		<div class="kontrol">
 			<div class="panah"></div>
 			<div class="custom-control custom-radio">
 		      <input type="radio" class="custom-control-input" id="customRadio0" name="example1" checked>
@@ -311,10 +285,6 @@
 		    <div class="custom-control custom-radio">
 		      <input type="radio" class="custom-control-input" id="customRadio1" name="example1">
 		      <label class="custom-control-label" for="customRadio1">Ubuntu Style</label>
-		    </div>   
-		    <div class="custom-control custom-radio">
-		      <input type="radio" class="custom-control-input" id="customRadio10" name="example1">
-		      <label class="custom-control-label" for="customRadio10">Manual Input</label>
 		    </div>   
 		    <div class="custom-control custom-radio">
 		      <input type="radio" class="custom-control-input" id="customRadio2" name="example1">
@@ -348,7 +318,6 @@
 		      <input type="radio" class="custom-control-input" id="customRadio9" name="example1">
 		      <label class="custom-control-label" for="customRadio9">RGB Gaming</label>
 		    </div> 
-		    <input class="btn mt-3" id="color-picker" value='#0079FF' onclick="onClickWarna()" />
 		</div>
 		<div class="bg ubuntu"></div>
 		<div class="bg dawn"></div>
@@ -361,7 +330,6 @@
 		<div class="bg red"></div>
 		<div class="bg green"></div>
 		<div class="bg blue"></div>
-		<div class="bg custom"></div>
 		<div class="container">
 			<div class="quotes">
 				<p id="quotation"></p>
@@ -382,147 +350,16 @@
 			<div class="jam" id="time">
 				00:00:00
 			</div>
-			<div class="ucapan" id="quote"></div>		
+			<div class="ucapan" id="quote">
+				
+			</div>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
 		<script type="text/javascript">
 			gaming=false;
 			tombol=false;
-			function init(){
-				bro();
-				init_auto();
-				readMode();
-				readColor();
-				randomQuote();
-				specialEffects();
-			}
-			baffleEffect = baffle('.note', {
-			    characters: 'supercalifragilisticexpialidocious',
-			    speed: 150
-			});
-			function readMode(){
-				if(localStorage.getItem("mode")!=null){
-
-				}
-				switch(localStorage.getItem("mode")) {
-					case 'ubuntu':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio1").prop('checked',true);
-						ubuntu();
-						break;
-					case 'dawn':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio2").prop('checked',true);
-						dawn();
-						break;
-					case 'morning':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio3").prop('checked',true);
-						morning();
-						break;
-					case 'noon':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio4").prop('checked',true);
-						noon();
-						break;
-					case 'afternoon':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio5").prop('checked',true);
-						afternoon();
-						break;
-					case 'sunset':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio6").prop('checked',true);
-						sunset();
-						break;
-					case 'evening':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio7").prop('checked',true);
-						evening();
-						break;
-					case 'midnight':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio8").prop('checked',true);
-						midnight();
-						break;
-					case 'manual':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio10").prop('checked',true);
-						manual();
-						break;
-					case 'gaming1':
-						$('.kontrol input').prop('checked', false);
-						$("#customRadio9").prop('checked',true);
-						gaming1();
-						gaming=true;
-						break;
-					default:
-						
-				}
-			}
-			function readColor(){
-				if(localStorage.getItem("manualColor")==null){
-				}
-				else{
-					var color = $(".custom");
-					(color).css('background',localStorage.getItem("manualColor"));
-					$('#color-picker').val(localStorage.getItem("manualColor"));
-				}
-				colorpicker = $('#color-picker').spectrum({
-				  type: "text",
-				  showInput: "true",
-				  showAlpha: "false",
-				  showButtons: "false"
-				});
-				colorpicker.on('move.spectrum', function(e, tinycolor) {
-					var hexVal = tinycolor.toHexString();
-					var color = $(".custom");
-					color.css('background',hexVal);
-					console.log(hexVal);
-					localStorage.setItem("manualColor", hexVal);
-				 });
-			}
-			function onClickWarna(){
-				localStorage.setItem("mode", "manual");
-				nofill();
-				$('.kontrol input').prop('checked', false);
-				$("#customRadio10").prop('checked',true);
-				gaming=false;
-				manual();
-			}		
-			function specialEffects(){
-				if(localStorage.getItem("manualColor")=="#4c1130"){
-					setTimeout(function() { createNote("Mangat Git Menjalankan aktivitas nya :v"); }, 5000);
-				}
-				else if(localStorage.getItem("manualColor")=="#000000"){
-					setTimeout(function() { createNote("Kamu mau gak, Jadi Kekasihku ? <3"); }, 5000);
-				}
-			}
-			function createNote(isi){
-				$(".jam").css("font-size","30pt").css("bottom","calc( 50% - 50px )");
-				$(".ucapan").css("opacity","0");
-				$(".quotes").css("opacity","0");
-				$(".quotes").css("opacity","0");
-				$(".bulat").css("opacity","0");
-				$(".kotak li").css("opacity","0");
-				setTimeout(function() { writeNote(isi); }, 3000);
-			}
-			function writeNote(isi){
-				$(".note").text(isi).css("opacity","1");
-
-				baffle('.note')
-					.reveal(2000)
-				    .start()
-				    .set({
-				        characters: '░░█ /<▒▓▒ ▒░▒█/ █/▒ ▒▓/█▒ ▓▒░▓ ██░ ▒░▓░ ▒░▓█',
-				        speed: 150
-				    });
-				    localStorage.setItem("manualColor", "#0079FF");
-			}
 			$(".panah").click(function(){
 				if (tombol==false){
 					$(".panah").css("transform","rotate(225deg)");
@@ -543,7 +380,6 @@
 						init_auto();
 					}
 					auto=true;
-					localStorage.setItem("mode", "auto");
 					cek=true;
 				}
 				else{
@@ -552,43 +388,30 @@
 				}
 				if($("#customRadio1").prop('checked')){
 					ubuntu();
-					localStorage.setItem("mode", "ubuntu");
 				}
 				else if($("#customRadio2").prop('checked')){
 					dawn();
-					localStorage.setItem("mode", "dawn");
 				}
 				else if($("#customRadio3").prop('checked')){
 					morning();
-					localStorage.setItem("mode", "morning");
 				}
 				else if($("#customRadio4").prop('checked')){
 					noon();
-					localStorage.setItem("mode", "noon");
 				}
 				else if($("#customRadio5").prop('checked')){
 					afternoon();
-					localStorage.setItem("mode", "afternoon");
 				}
 				else if($("#customRadio6").prop('checked')){
 					sunset();
-					localStorage.setItem("mode", "sunset");
 				}
 				else if($("#customRadio7").prop('checked')){
 					evening();
-					localStorage.setItem("mode", "evening");
 				}
 				else if($("#customRadio8").prop('checked')){
 					midnight();
-					localStorage.setItem("mode", "midnight");
-				}
-				else if($("#customRadio10").prop('checked')){
-					manual();
-					localStorage.setItem("mode", "manual");
 				}
 				else if($("#customRadio9").prop('checked')){
 					gaming1();
-					localStorage.setItem("mode", "gaming1");
 					gaming=true;
 				}
 				if (gaming==false){
@@ -607,7 +430,6 @@
 				$(".red").animate({opacity:"0"},500);
 				$(".green").animate({opacity:"0"},500);
 				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
 				white();
 			}
 			function dawn(){
@@ -622,7 +444,6 @@
 				$(".red").animate({opacity:"0"},500);
 				$(".green").animate({opacity:"0"},500);
 				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
 				black();
 			}
 			function morning(){
@@ -637,7 +458,6 @@
 				$(".red").animate({opacity:"0"},500);
 				$(".green").animate({opacity:"0"},500);
 				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
 				black();
 			}
 			function noon(){
@@ -652,7 +472,6 @@
 				$(".red").animate({opacity:"0"},500);
 				$(".green").animate({opacity:"0"},500);
 				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
 				black();
 			}
 			function afternoon(){
@@ -667,7 +486,6 @@
 				$(".red").animate({opacity:"0"},500);
 				$(".green").animate({opacity:"0"},500);
 				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
 				black();
 			}
 			function sunset(){
@@ -682,7 +500,6 @@
 				$(".red").animate({opacity:"0"},500);
 				$(".green").animate({opacity:"0"},500);
 				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
 				white();
 			}
 			function evening(){
@@ -697,95 +514,75 @@
 				$(".red").animate({opacity:"0"},500);
 				$(".green").animate({opacity:"0"},500);
 				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
 				white();
 			}
 			function midnight(){
-				$(".midnight").animate({opacity:"1"},1000);
-				$(".dawn").animate({opacity:"0"},500);
-				$(".ubuntu").animate({opacity:"0"},500);
-				$(".morning").animate({opacity:"0"},500);
-				$(".noon").animate({opacity:"0"},500);
-				$(".afternoon").animate({opacity:"0"},500);
-				$(".sunset").animate({opacity:"0"},500);
-				$(".evening").animate({opacity:"0"},500);
-				$(".red").animate({opacity:"0"},500);
-				$(".green").animate({opacity:"0"},500);
-				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
+				$(".midnight").animate({opacity:"1"},2000);
+				$(".dawn").animate({opacity:"0"},2000);
+				$(".ubuntu").animate({opacity:"0"},2000);
+				$(".morning").animate({opacity:"0"},2000);
+				$(".noon").animate({opacity:"0"},2000);
+				$(".afternoon").animate({opacity:"0"},2000);
+				$(".sunset").animate({opacity:"0"},2000);
+				$(".evening").animate({opacity:"0"},2000);
+				$(".red").animate({opacity:"0"},2000);
+				$(".green").animate({opacity:"0"},2000);
+				$(".blue").animate({opacity:"0"},2000);
 				white();
 			}
 			function red(){
+				white();
 				$(".jam").css("color","#F00");
 				$(".ucapan").css("color","#F00");
 				$(".bulat span").css("border-color","#F00");
 				$(".kotak li").css("background","#000");
-				$(".red").animate({opacity:"1"},1000);
-				$(".midnight").animate({opacity:"0"},500);
-				$(".dawn").animate({opacity:"0"},500);
-				$(".ubuntu").animate({opacity:"0"},500);
-				$(".morning").animate({opacity:"0"},500);
-				$(".noon").animate({opacity:"0"},500);
-				$(".afternoon").animate({opacity:"0"},500);
-				$(".sunset").animate({opacity:"0"},500);
-				$(".evening").animate({opacity:"0"},500);
-				$(".green").animate({opacity:"0"},500);
-				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
-				white();
+				$(".red").animate({opacity:"1"},2000);
+				$(".midnight").animate({opacity:"0"},2000);
+				$(".dawn").animate({opacity:"0"},2000);
+				$(".ubuntu").animate({opacity:"0"},2000);
+				$(".morning").animate({opacity:"0"},2000);
+				$(".noon").animate({opacity:"0"},2000);
+				$(".afternoon").animate({opacity:"0"},2000);
+				$(".sunset").animate({opacity:"0"},2000);
+				$(".evening").animate({opacity:"0"},2000);
+				$(".green").animate({opacity:"0"},2000);
+				$(".blue").animate({opacity:"0"},2000);
 			}
 			function green(){
+				white();
 				$(".jam").css("color","#0F0");
 				$(".ucapan").css("color","#0F0");
 				$(".bulat span").css("border-color","#0F0");
 				$(".kotak li").css("background","#000");
-				$(".green").animate({opacity:"1"},1000);
-				$(".midnight").animate({opacity:"0"},500);
-				$(".dawn").animate({opacity:"0"},500);
-				$(".ubuntu").animate({opacity:"0"},500);
-				$(".morning").animate({opacity:"0"},500);
-				$(".noon").animate({opacity:"0"},500);
-				$(".afternoon").animate({opacity:"0"},500);
-				$(".sunset").animate({opacity:"0"},500);
-				$(".evening").animate({opacity:"0"},500);
-				$(".red").animate({opacity:"0"},500);
-				$(".blue").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
-				white();
+				$(".green").animate({opacity:"1"},2000);
+				$(".midnight").animate({opacity:"0"},2000);
+				$(".dawn").animate({opacity:"0"},2000);
+				$(".ubuntu").animate({opacity:"0"},2000);
+				$(".morning").animate({opacity:"0"},2000);
+				$(".noon").animate({opacity:"0"},2000);
+				$(".afternoon").animate({opacity:"0"},2000);
+				$(".sunset").animate({opacity:"0"},2000);
+				$(".evening").animate({opacity:"0"},2000);
+				$(".red").animate({opacity:"0"},2000);
+				$(".blue").animate({opacity:"0"},2000);
 			}
 			function blue(){
+				white();
 				$(".jam").css("color","#00F");
 				$(".ucapan").css("color","#00F");
 				$(".bulat span").css("border-color","#00F");
 				$(".kotak li").css("background","#000");
-				$(".blue").animate({opacity:"1"},1000);
-				$(".midnight").animate({opacity:"0"},500);
-				$(".dawn").animate({opacity:"0"},500);
-				$(".ubuntu").animate({opacity:"0"},500);
-				$(".morning").animate({opacity:"0"},500);
-				$(".noon").animate({opacity:"0"},500);
-				$(".afternoon").animate({opacity:"0"},500);
-				$(".sunset").animate({opacity:"0"},500);
-				$(".evening").animate({opacity:"0"},500);
-				$(".red").animate({opacity:"0"},500);
-				$(".green").animate({opacity:"0"},500);
-				$(".custom").animate({opacity:"0"},500);
-				white();
-			}
-			function manual(){
-				$(".custom").animate({opacity:"1"},1000);
-				$(".midnight").animate({opacity:"0"},500);
-				$(".dawn").animate({opacity:"0"},500);
-				$(".ubuntu").animate({opacity:"0"},500);
-				$(".morning").animate({opacity:"0"},500);
-				$(".noon").animate({opacity:"0"},500);
-				$(".afternoon").animate({opacity:"0"},500);
-				$(".sunset").animate({opacity:"0"},500);
-				$(".evening").animate({opacity:"0"},500);
-				$(".red").animate({opacity:"0"},500);
-				$(".green").animate({opacity:"0"},500);
-				$(".blue").animate({opacity:"0"},500);
-				white();
+				$(".blue").animate({opacity:"1"},2000);
+				$(".midnight").animate({opacity:"0"},2000);
+				$(".dawn").animate({opacity:"0"},2000);
+				$(".ubuntu").animate({opacity:"0"},2000);
+				$(".morning").animate({opacity:"0"},2000);
+				$(".noon").animate({opacity:"0"},2000);
+				$(".afternoon").animate({opacity:"0"},2000);
+				$(".sunset").animate({opacity:"0"},2000);
+				$(".evening").animate({opacity:"0"},2000);
+				$(".red").animate({opacity:"0"},2000);
+				$(".green").animate({opacity:"0"},2000);
 			}
 			warna=1;
 			function gaming1(){
@@ -830,10 +627,10 @@
 				$(".kotak li").css("background","#FFF");
 			}
 			function debug(){
-				console.log('debug');
+				console.log(auto);
 			}
 
-			var txt = 'Halo Gita Nurpadilah <3';
+			var txt = 'Hai Gita Nurpadilah';
 			var txt2 = 'txt';
 
 			function checkTime(i) {
@@ -857,43 +654,43 @@
 				S=s;
 
 				if (H<5){
-					txt='Have a Good Night Gita:)';
+					txt='Have a Good Night Gita 😴';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<9){
-					txt='Good Morning Gita Nurpadilah:)';
+					txt='Good Morning Gita Nurpadilah 😁';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<12){
-					txt='Be Happy Today Gita:-D';
+					txt='Be Happy Today';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<16){
-					txt='Good Afternoon Gita Manis:)';
+					txt='Good Afternoon Gita Manis 😉';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<19){
-					txt='Good Afternoon, Take a Rest:)';
+					txt='Good Afternoon Gita, Have a good rest';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<23){
-					txt='Good Evening Sweetie:)';
+					txt='Good Evening Gita Nurpadilah';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
 				}
 				else if(H<=24){
-					txt='Time to Sleep, Good Night:)';
+					txt='Time to Sleep, Good Night';
 					if(txt != txt2 && !starting)
 						document.getElementById("quote").innerHTML = txt;
 					txt2=txt;
@@ -934,6 +731,7 @@
 			}
 			startTime();
 			function init_auto(){
+				randomQuote();
 				if ((H>23) || (H<4)){
 					midnight();
 				}
@@ -987,7 +785,7 @@
 			  },
 			  {
 			    "quote": "Masa lalu dan frustasi merupakan fondasi dasar untuk menciptakan kembali kehidupan baru yang lebih baik",
-			    "source": "KhaidirArt"
+			    "source": "Anthony Robbins"
 			  },
 			  {
 			    "quote": "Ada kalimat yang ingin aku dapatkan dari dia tapi aku dapat dari orang lain",
@@ -1006,7 +804,7 @@
 			    "source": "Pidi baiq (Dilan 1990)"
 			  },
 			  {
-			    "quote": "You make me happy in ways other people can't",
+			    "quote": "You make me happy in ways other people can't.",
 			    "source": "KhaidirArt"
 			  },
 			]
